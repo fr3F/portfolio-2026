@@ -1,0 +1,250 @@
+<section
+  class="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#262525] px-5 py-16"
+>
+  <!-- Glows -->
+  <div
+    class="absolute top-0 left-0 w-80 h-80 rounded-full blur-[100px] bg-yellow-400/5 pointer-events-none"
+  ></div>
+  <div
+    class="absolute bottom-0 right-0 w-72 h-72 rounded-full blur-[100px] bg-green-400/5 pointer-events-none"
+  ></div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px] bg-yellow-400/[0.025] pointer-events-none"
+  ></div>
+
+  <!-- SVG Circuits -->
+  <svg
+    class="absolute inset-0 w-full h-full pointer-events-none"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1920 1080"
+    preserveAspectRatio="xMidYMid slice"
+  >
+    <defs>
+      <filter id="glow-effect" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    <g opacity="0.25">
+      <line
+        x1="50"
+        y1="200"
+        x2="400"
+        y2="200"
+        stroke="#22c55e"
+        stroke-width="1.5"
+        class="animate-blink-3"
+      />
+      <line
+        x1="50"
+        y1="300"
+        x2="350"
+        y2="300"
+        stroke="#facc15"
+        stroke-width="1.5"
+        class="animate-blink-4"
+      />
+      <line
+        x1="80"
+        y1="400"
+        x2="420"
+        y2="400"
+        stroke="#22c55e"
+        stroke-width="1.5"
+        class="animate-blink-35"
+      />
+      <line
+        x1="150"
+        y1="150"
+        x2="150"
+        y2="450"
+        stroke="#facc15"
+        stroke-width="1.5"
+        opacity="0.3"
+      />
+      <line
+        x1="280"
+        y1="180"
+        x2="280"
+        y2="420"
+        stroke="#22c55e"
+        stroke-width="1.5"
+        opacity="0.3"
+      />
+      <circle
+        cx="150"
+        cy="200"
+        r="4"
+        fill="#22c55e"
+        filter="url(#glow-effect)"
+        class="animate-pulse"
+      />
+      <circle
+        cx="280"
+        cy="300"
+        r="4"
+        fill="#facc15"
+        filter="url(#glow-effect)"
+        class="animate-pulse"
+      />
+    </g>
+    <g opacity="0.25">
+      <line
+        x1="1500"
+        y1="300"
+        x2="1870"
+        y2="300"
+        stroke="#facc15"
+        stroke-width="1.5"
+        class="animate-blink-35"
+      />
+      <line
+        x1="1520"
+        y1="420"
+        x2="1870"
+        y2="420"
+        stroke="#22c55e"
+        stroke-width="1.5"
+        class="animate-blink-4"
+      />
+      <line
+        x1="1650"
+        y1="250"
+        x2="1650"
+        y2="600"
+        stroke="#22c55e"
+        stroke-width="1.5"
+        opacity="0.3"
+      />
+      <line
+        x1="1780"
+        y1="280"
+        x2="1780"
+        y2="570"
+        stroke="#facc15"
+        stroke-width="1.5"
+        opacity="0.3"
+      />
+      <circle
+        cx="1650"
+        cy="300"
+        r="4"
+        fill="#facc15"
+        filter="url(#glow-effect)"
+        class="animate-pulse"
+      />
+      <circle
+        cx="1780"
+        cy="420"
+        r="4"
+        fill="#22c55e"
+        filter="url(#glow-effect)"
+        class="animate-pulse"
+      />
+    </g>
+  </svg>
+
+  <!-- Contenu principal -->
+  <div class="relative z-10 w-full max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center">
+      <!-- COLONNE GAUCHE -->
+      <div class="text-left">
+        <!-- Titre -->
+        <div class="mb-8">
+          <h2
+            class="uppercase font-extrabold leading-none text-white text-[clamp(2rem,8vw,5rem)] tracking-tight"
+          >
+            qui
+          </h2>
+          <h2
+            class="uppercase font-extrabold leading-none text-yellow-400 text-[clamp(1.6rem,6.5vw,4rem)] tracking-tight"
+          >
+            suis-je ?
+          </h2>
+        </div>
+
+        <!-- Citation -->
+        <div class="flex gap-5 items-stretch">
+          <div
+            class="w-0.5 rounded-full bg-gradient-to-b from-green-400 to-green-400/50 flex-shrink-0"
+          ></div>
+          <p
+            class="text-gray-400 text-[clamp(0.875rem,2.5vw,1.125rem)] leading-relaxed"
+          >
+            Transformer les idées en solutions digitales.<br />
+            Explorez mon expérience, mes compétences<br />
+            et les projets qui me passionnent.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex gap-6 mt-10">
+          <div class="text-center">
+            <p
+              class="font-extrabold text-yellow-400 text-[clamp(1.4rem,4vw,1.875rem)] leading-none"
+            >
+              +2
+            </p>
+            <p class="text-gray-500 text-[0.7rem] mt-1">ans d'exp.</p>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div class="text-center">
+            <p
+              class="font-extrabold text-yellow-400 text-[clamp(1.4rem,4vw,1.875rem)] leading-none"
+            >
+              10+
+            </p>
+            <p class="text-gray-500 text-[0.7rem] mt-1">projets</p>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div class="text-center">
+            <p
+              class="font-extrabold text-yellow-400 text-[clamp(1.4rem,4vw,1.875rem)] leading-none"
+            >
+              5+
+            </p>
+            <p class="text-gray-500 text-[0.7rem] mt-1">frameworks</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLONNE DROITE -->
+      <div class="p-7 sm:p-10 lg:p-12">
+        <article class="mb-6">
+          <p class="text-gray-400 text-[clamp(0.875rem,2.5vw,1.125rem)] mb-2">
+            Je m'appelle
+          </p>
+          <h3
+            class="text-yellow-400 font-extrabold leading-tight text-[clamp(1.1rem,3.5vw,1.75rem)] mb-2"
+          >
+            RAZAKARIVONY<br />
+            Finoana Feno Fitiavana
+          </h3>
+          <p class="text-gray-400 text-[clamp(0.875rem,2.5vw,1.125rem)]">
+            développeur passionné.
+          </p>
+        </article>
+
+        <div class="h-px bg-white/[0.08] mb-6"></div>
+
+        <article>
+          <p
+            class="text-gray-400 text-[clamp(0.8rem,2.2vw,1rem)] leading-relaxed"
+          >
+            Je développe des solutions numériques performantes grâce à une
+            maîtrise de
+            <span class="font-semibold text-green-400"
+              >HTML, CSS, JavaScript, TypeScript, Angular</span
+            >
+            et
+            <span class="font-semibold text-green-400">Node.js</span>, en
+            m'appuyant sur des frameworks et outils modernes.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

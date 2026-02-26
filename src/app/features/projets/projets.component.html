@@ -1,0 +1,378 @@
+<section
+  #projetsSection
+  class="relative bg-[#262525] overflow-hidden min-h-screen"
+>
+  <!-- Lueurs décoratives -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div
+      class="absolute top-0 left-1/4 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-yellow-400/5 rounded-full blur-[80px] sm:blur-[100px] lg:blur-[120px]"
+    ></div>
+    <div
+      class="absolute bottom-0 right-1/4 w-[250px] sm:w-[350px] lg:w-[400px] h-[250px] sm:h-[350px] lg:h-[400px] bg-yellow-400/4 rounded-full blur-[60px] sm:blur-[80px] lg:blur-[100px]"
+    ></div>
+  </div>
+
+  <div
+    class="relative z-10 w-full mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12"
+  >
+    <!-- ===== EN-TÊTE ===== -->
+    <div class="text-center mb-8 sm:mb-10 md:mb-12">
+      <h2
+        scrub-each-word
+        text-split
+        class="font-extrabold uppercase tracking-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-white mb-3 sm:mb-4"
+      >
+        <app-titre />
+      </h2>
+    </div>
+
+    <!-- ===== DESCRIPTION + FILTRES + PROGRESS ===== -->
+    <div
+      class="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-8 lg:gap-12 mb-8 sm:mb-10 md:mb-12"
+    >
+      <p
+        class="font-outfit text-gray-400 leading-relaxed text-center md:text-right text-sm sm:text-base lg:text-lg max-w-[260px] sm:max-w-xs md:max-w-[220px] lg:max-w-xs flex-shrink-0"
+      >
+        Découvrez mes projets récents – du design à l'implémentation complète.
+      </p>
+      <div class="hidden md:block h-10 w-px bg-white/10 flex-shrink-0"></div>
+      <div class="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+        <div
+          class="flex items-center gap-1 sm:gap-2 bg-white/5 border border-white/10 rounded-full px-1.5 sm:px-2 py-1.5 sm:py-2 backdrop-blur-sm"
+        >
+          <button
+            type="button"
+            [class]="getButtonStyle('all')"
+            [attr.aria-pressed]="filtreActif === 'all'"
+            (click)="filtrer('all')"
+            aria-label="Afficher tous les projets"
+          >
+            Tous
+          </button>
+          <button
+            type="button"
+            [class]="getButtonStyle('online')"
+            [attr.aria-pressed]="filtreActif === 'online'"
+            (click)="filtrer('online')"
+            aria-label="Projets en ligne"
+          >
+            <span class="hidden sm:inline">🌐</span> En ligne
+          </button>
+          <button
+            type="button"
+            [class]="getButtonStyle('github')"
+            [attr.aria-pressed]="filtreActif === 'github'"
+            (click)="filtrer('github')"
+            aria-label="Projets GitHub"
+          >
+            <span class="hidden sm:inline">⌥</span> GitHub
+          </button>
+        </div>
+
+        <!-- Progress circulaire -->
+        <div
+          *ngIf="projetsAffiches.length > 1"
+          class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center flex-shrink-0"
+        >
+          <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle
+              cx="50"
+              cy="50"
+              r="42"
+              fill="none"
+              stroke="rgba(255,255,255,0.08)"
+              stroke-width="8"
+            />
+            <circle
+              #progressCircle
+              cx="50"
+              cy="50"
+              r="42"
+              fill="none"
+              stroke="rgb(250 204 21)"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-dasharray="263.89"
+              stroke-dashoffset="263.89"
+              class="transition-all duration-300"
+            />
+          </svg>
+          <svg
+            class="absolute w-3 h-3 sm:w-4 sm:h-4 text-yellow-400"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 📱 MOBILE & TABLETTE : scroll natif horizontal ===== -->
+    <div class="block md:hidden relative">
+      <!-- Dégradés bords -->
+      <div
+        class="absolute left-0 top-0 bottom-4 w-6 bg-gradient-to-r from-[#262525] to-transparent z-10 pointer-events-none"
+      ></div>
+      <div
+        class="absolute right-0 top-0 bottom-4 w-6 bg-gradient-to-l from-[#262525] to-transparent z-10 pointer-events-none"
+      ></div>
+
+      <div
+        #projetsContainerMobile
+        class="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+        style="
+          height: clamp(360px, 58vh, 500px);
+          -webkit-overflow-scrolling: touch;
+        "
+      >
+        <div
+          *ngFor="let projet of projetsAffiches; let i = index"
+          class="flex-shrink-0 snap-start h-full w-[78vw] sm:w-[55vw]"
+        >
+          <div
+            class="group relative bg-white/[0.04] backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-400/40 hover:bg-white/[0.07] hover:shadow-[0_0_40px_rgba(250,204,21,0.08)] transition-all duration-500 ease-out h-full flex flex-col"
+            tabindex="0"
+          >
+            <div
+              class="h-0.5 w-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+
+            <div class="p-4 sm:p-5 flex flex-col flex-grow">
+              <!-- Header -->
+              <div class="flex items-center justify-between mb-3">
+                <span
+                  class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-yellow-400/10 text-yellow-400 font-outfit font-bold text-xs border border-yellow-400/20"
+                >
+                  {{ i + 1 < 10 ? "0" + (i + 1) : i + 1 }}
+                </span>
+                <div class="flex items-center gap-2">
+                  <a
+                    *ngIf="projet.lienOnline"
+                    [href]="projet.lienOnline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-7 h-7 flex items-center justify-center rounded-full bg-yellow-400/10 text-yellow-400 hover:bg-yellow-400 hover:text-gray-900 transition-all duration-200"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-9 4l6-6m0 0l-6-6"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    *ngIf="projet.lienGitHub"
+                    [href]="projet.lienGitHub"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="w-7 h-7 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:bg-white/15 hover:text-white border border-white/10 transition-all duration-200"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <h3
+                class="font-outfit text-base sm:text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-yellow-400 transition-colors duration-300"
+              >
+                {{ projet.titre }}
+              </h3>
+              <div
+                class="h-px w-6 bg-yellow-400/40 mb-3 group-hover:w-12 transition-all duration-500"
+              ></div>
+              <p
+                class="font-outfit text-gray-400 text-sm leading-relaxed line-clamp-3 flex-grow group-hover:text-gray-300 transition-colors duration-300"
+              >
+                {{ projet.description }}
+              </p>
+              <div class="flex flex-wrap gap-1.5 mt-3">
+                <span
+                  *ngFor="let tech of projet.stack"
+                  class="font-outfit inline-flex px-2 py-0.5 bg-white/5 text-gray-400 text-xs font-medium rounded-full border border-white/10"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 💻 DESKTOP : GSAP scroll horizontal ===== -->
+    <div class="hidden md:block">
+      <div
+        #projetsContainer
+        class="flex gap-5 lg:gap-6 xl:gap-8 will-change-transform pb-4"
+        style="height: clamp(420px, 65vh, 620px)"
+      >
+        <div
+          *ngFor="let projet of projetsAffiches; let i = index"
+          class="flex-shrink-0 md:w-[42vw] md:max-w-[400px] lg:w-[35vw] lg:max-w-[440px] xl:w-[30vw] xl:max-w-[480px] 2xl:w-[26vw] 2xl:max-w-[520px]"
+        >
+          <div
+            class="group relative bg-white/[0.04] backdrop-blur-md rounded-3xl overflow-hidden border border-white/10 hover:border-yellow-400/40 hover:bg-white/[0.07] hover:shadow-[0_0_50px_rgba(250,204,21,0.08)] transition-all duration-500 ease-out h-full flex flex-col"
+            tabindex="0"
+          >
+            <div
+              class="absolute top-5 right-5 font-outfit font-extrabold text-6xl xl:text-7xl text-white/[0.04] select-none leading-none pointer-events-none"
+            >
+              {{ i + 1 < 10 ? "0" + (i + 1) : i + 1 }}
+            </div>
+            <div
+              class="h-1 w-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+
+            <div class="p-5 lg:p-6 xl:p-7 2xl:p-8 flex flex-col flex-grow">
+              <span
+                class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-400/10 text-yellow-400 font-outfit font-bold text-xs mb-4 lg:mb-5 self-start border border-yellow-400/20"
+              >
+                {{ i + 1 < 10 ? "0" + (i + 1) : i + 1 }}
+              </span>
+              <h3
+                class="font-outfit font-bold text-white mb-2 lg:mb-3 line-clamp-2 group-hover:text-yellow-400 transition-colors duration-300 text-lg lg:text-xl xl:text-2xl"
+              >
+                {{ projet.titre }}
+              </h3>
+              <div
+                class="h-px w-8 bg-yellow-400/40 mb-3 lg:mb-4 group-hover:w-16 transition-all duration-500"
+              ></div>
+              <p
+                class="font-outfit text-gray-400 mb-4 lg:mb-5 leading-relaxed line-clamp-3 lg:line-clamp-4 flex-grow group-hover:text-gray-300 transition-colors duration-300 text-sm lg:text-base"
+              >
+                {{ projet.description }}
+              </p>
+              <div class="flex flex-wrap gap-1.5 lg:gap-2 mb-4 lg:mb-5">
+                <span
+                  *ngFor="let tech of projet.stack"
+                  class="font-outfit inline-flex px-2.5 lg:px-3 py-0.5 lg:py-1 bg-white/5 text-gray-300 text-xs font-medium rounded-full border border-white/10 group-hover:border-yellow-400/20 group-hover:text-yellow-100 transition-all duration-300"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              <div class="flex flex-wrap gap-2 lg:gap-3 mt-auto">
+                <a
+                  *ngIf="projet.lienOnline"
+                  [href]="projet.lienOnline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-outfit inline-flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full bg-yellow-400 text-gray-900 text-xs lg:text-sm font-semibold hover:bg-yellow-300 active:scale-95 transition-all duration-200 shadow-md hover:shadow-yellow-400/30"
+                >
+                  Voir le projet
+                  <svg
+                    class="w-3 h-3 lg:w-3.5 lg:h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4m-9 4l6-6m0 0l-6-6"
+                    />
+                  </svg>
+                </a>
+                <a
+                  *ngIf="projet.lienGitHub"
+                  [href]="projet.lienGitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-outfit inline-flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full bg-white/[0.08] text-gray-300 text-xs lg:text-sm font-semibold border border-white/10 hover:bg-white/15 hover:text-white hover:border-white/25 active:scale-95 transition-all duration-200"
+                >
+                  Code source
+                  <svg
+                    class="w-3 h-3 lg:w-3.5 lg:h-3.5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== HINT SCROLL ===== -->
+    <div
+      class="flex items-center justify-center gap-2 mt-5 lg:mt-6 text-gray-600 text-xs sm:text-sm font-outfit animate-pulse"
+    >
+      <svg
+        class="w-3.5 h-3.5 lg:w-4 lg:h-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+      Faites défiler pour explorer
+    </div>
+
+    <!-- ===== ÉTAT VIDE ===== -->
+    <div *ngIf="estVide" class="text-center py-16 sm:py-20 md:py-28">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/5 border border-white/10 mb-5 sm:mb-6"
+      >
+        <svg
+          class="w-7 h-7 sm:w-9 sm:h-9 text-gray-500"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0016.803 15.803z"
+          />
+        </svg>
+      </div>
+      <p
+        class="font-outfit text-lg sm:text-xl md:text-2xl font-medium text-gray-400 mb-2"
+      >
+        Aucun projet trouvé
+      </p>
+      <p class="font-outfit text-gray-600 text-xs sm:text-sm mb-6 sm:mb-8">
+        Essayez un autre filtre
+      </p>
+      <button
+        (click)="filtrer('all')"
+        class="font-outfit inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-yellow-400 text-gray-900 rounded-full text-sm sm:text-base font-semibold hover:bg-yellow-300 active:scale-95 transition-all shadow-lg"
+      >
+        Voir tous les projets
+      </button>
+    </div>
+  </div>
+</section>

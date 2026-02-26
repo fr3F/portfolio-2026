@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: 'Oswald', sans-serif;
+}
+
+.ticker {
+  padding: 1vw;
+  white-space: nowrap;
+}
+
+
+.ticker:last-child {
+  background-color: #1f1f1f;
+  transform: rotateZ(-2deg) scale(1.1);
+} 
+
+.ticker-wrap {
+  display: flex;
+  gap: 20px;
+}
+.ticker-text {
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #b8b4b4;
+}
+
+
+.ticker:last-child .ticker-text {
+  color: #b8b4b4;
+}
+
+.accent {
+  color: #0000008f;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1em;
+}
+
+.ticker:last-child .accent {
+  color: #65eeae;
+}

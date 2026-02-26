@@ -1,0 +1,8 @@
+.projets-section {
+  overflow: hidden;
+}
+
+.avantages-container {
+  width: max-content;
+  will-change: transform;
+}

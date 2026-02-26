@@ -1,0 +1,29 @@
+.fullStack {
+  opacity: 0;
+}
+
+
+.developpeur {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stack {
+  opacity: 1;
+}
+.stack2 {
+  opacity: 0;
+}
+
+.developpeur,
+.fullStack,
+.stack,
+.stack2 {
+  transform: translateY(40px);
+}
+
+
+.word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+

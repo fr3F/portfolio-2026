@@ -1,0 +1,21 @@
+.word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+/* On supprime height: 100vh → très mauvais pour l'UX et le scroll */
+.animation-section {
+  /* height: 100vh;  ← SUPPRIMER ÇA */
+  min-height: 80vh;
+}
+
+.custom-progress-pointer {
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+#projetsSection,
+#projetsSection * {
+  cursor: none !important;
+}
